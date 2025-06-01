@@ -1,1 +1,13 @@
 
+Problem 2: 
+CREATE FUNCTION getNthHigestSalary (@N INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Salary INT;
+    WITH cte AS(
+          SELECT *, DENSE_RANK() OVER(ORDER BY salary DESC) rnk FROM Employee
+    )
+    SELECT @Salary = salary FROM cte WHERE rnk = @N;
+    RETURN @Salary;
+END;
