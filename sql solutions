@@ -1,5 +1,5 @@
 
-##Problem 2: Nth Highest Salary
+##Problem 2: Nth Highest Salary using desnse rank
 CREATE FUNCTION getNthHigestSalary (@N INT)
 RETURNS INT
 AS
@@ -11,3 +11,19 @@ BEGIN
     SELECT @Salary = salary FROM cte WHERE rnk = @N;
     RETURN @Salary;
 END;
+----------or-------------
+using offset, fetch
+CREATE FUNCTION getNthHighestSalary(@N int)
+returns int
+as
+begin
+    declare @result int =(
+        select distinct salary
+        from employee
+        order by salary desc
+        offset (@n-1) rows
+        fetch next 1 rows only
+    );
+
+    return @result;
+end
