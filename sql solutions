@@ -1,5 +1,5 @@
 
-Problem 2: 
+##Problem 2: Nth Highest Salary
 CREATE FUNCTION getNthHigestSalary (@N INT)
 RETURNS INT
 AS
